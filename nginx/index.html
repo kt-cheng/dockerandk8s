@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Docker nginx</title>
+  <script>
+    function serverdata(parent) {
+      const child = document.createElement("div");
+
+      const xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4) {
+          if (this.status != 200) {
+            child.innerHTML = `<p>Something Wrong... Status code:${this.status} ..</p>`;
+            return;
+          }
+
+          child.innerHTML = this.responseText;
+          parent.appendChild(child);
+        }
+      };
+
+      xhttp.open("GET", "http://tpo-docker.ubitus.net:30500/hello/", true);
+      xhttp.send();
+    }
+    function clickme() {
+      const msg = document.getElementById("message");
+      msg.innerText = "Can you seeee ↓↓↓\n\n";
+      serverdata(msg);
+    }
+  </script>
+</head>
+
+<body>
+  <p>Hello Docker Nginx!</p>
+  <button onclick="clickme()">Click This</button>
+  <div>----------------------------</div>
+  <div id="message"></div>
+</body>
+
+</html>
